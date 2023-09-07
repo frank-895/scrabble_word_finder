@@ -25,10 +25,10 @@ def word_possible(word, user_letters):
     index = 0 # to track index of letter not possessed by user
     for letter in word:
         if letter in user_letters:
-            user_letters.remove(letter) # remove from list, so double letters don't yeild error
+            user_letters.remove(letter) # remove from list, so double letters don't yield error
         else:
             counter += 1
-            word = word[:index] + word[index].upper() + word[index + 1:]
+            word = word[:index] + word[index].upper() + word[index + 1:] # mark letters not possessed by user with uppercase
         if counter > no_qu_marks + 1:
             return False
         index += 1
@@ -38,21 +38,21 @@ def word_possible(word, user_letters):
 print("This program finds the possible scrabble words that can be played with your letters.\n")
 number_letters = 0
 valid_numbers = ["1", "2", "3", "4", "5", "6", "7"]
-while number_letters not in valid_numbers:
+while number_letters not in valid_numbers: # only allows input of numbers from valid_numbers
     number_letters = input("Enter the number of letters you have: ")
 number_letters = int(number_letters)
 
-for i in range(number_letters):
+for i in range(number_letters): # uses function to list user letters
     user_letters.append(prompt_letter())
 
 # load in valid words
 valid_words = open("valid_words.txt", 'r').readlines()
 for i in range(len(valid_words)):
-    valid_words[i] = valid_words[i].strip().lower()
+    valid_words[i] = valid_words[i].strip().lower() # remove newline characters and make all lowercase
 
 # load valid words into possible_words
 for word in valid_words:
-    user_letters_copy = user_letters.copy()
+    user_letters_copy = user_letters.copy() # use copy as function removes letters from muteable list
     return_value = word_possible(word, user_letters_copy)
     if return_value != False:
         possible_words.append(return_value)
@@ -61,23 +61,23 @@ for word in valid_words:
 for word in possible_words:
     word_value = 0
     for letter in word:
-        word_value += letter_values[letter.lower()]
+        word_value += letter_values[letter.lower()] % as some letters are uppercase
     word_values[word] = word_value
 
 # sort dictionary
-word_values = sorted(word_values.items(), key = lambda x:x[1], reverse = True)
+word_values = sorted(word_values.items(), key = lambda x:x[1], reverse = True) # sorts by word_value
 
 # display to user
 current_word_value = word_values[0][1]
 index = 0
 print("\nThe words you can play are:")
 for i in range(current_word_value):
-    if word_values[index][1] == current_word_value:
-        print("\nWith a value of " + str(current_word_value) + " points:")
-    while word_values[index][1] == current_word_value:
+    if word_values[index][1] == current_word_value: 
+        print("\nWith a value of " + str(current_word_value) + " points:") # each word value has its own section, only printed if there is at least one word with the respective word_value
+    while word_values[index][1] == current_word_value: # print out all words with the same word value
         if word_values[index + 1][1] == current_word_value: # last value has no comma
             print(word_values[index][0] + ", ", end="")
         else:
             print(word_values[index][0])
         index += 1
-    current_word_value = current_word_value - 1
+    current_word_value = current_word_value - 1 # cycle through all word values
