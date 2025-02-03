@@ -60,6 +60,6 @@ This project is a beginner-level Python application. Through building this proje
 - Implement the ability to take double/triple letter or word scores into account.
 - Expand the project to suggest optimal word placements on an actual Scrabble board.
 
-**Limitations**
+## Limitations
 - The program currently only checks for words using a simple text-based approach and does not account for board layout.
 - It works with a basic Scrabble word list and does not have built-in support for official Scrabble dictionaries.
