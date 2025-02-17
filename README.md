@@ -1,4 +1,4 @@
-# Scrabble Word Finder
+# Scrabble Word Finder 🔎🔎🔎
 
 This program helps Scrabble players find possible words that can be played using a given set of letters. It takes the letters from the user and checks them against a predefined list of valid Scrabble words, calculating the Scrabble score for each possible word. The results are then displayed in descending order of point value.
 
